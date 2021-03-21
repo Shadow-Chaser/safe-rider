@@ -6,8 +6,8 @@ const SearchResult = (props) => {
     const {from, to} = props.route;
 
     return (
-        <div>
-            <h1>{from} to {to}</h1>
+        <div style={{marginLeft:'50px'}}>
+            <h1>From: {from} To: {to}</h1>
             <div className="ride-option">
                 <img src={image} alt=""/>
                 <p>{name}</p>

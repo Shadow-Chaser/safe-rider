@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import SearchResult from '../SearchResult/SearchResult';
 import GoogleMap from '../GoogleMap/GoogleMap';
 import './Search.css'
+import { Button } from 'react-bootstrap';
 
 const Search = () => {
     const {id} = useParams()
@@ -44,7 +45,7 @@ const Search = () => {
                     <input type="date" name='journey-date' placeholder="Journey Date" />
                     
                 </form>
-                <button onClick={()=> setResult(true)}>Search</button>
+                <Button variant='info' onClick={()=> setResult(true)}>Search</Button>
 
                 {result && <SearchResult target = {target} route={route}></SearchResult>}
 

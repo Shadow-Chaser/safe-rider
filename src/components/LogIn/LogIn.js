@@ -4,7 +4,8 @@ import "firebase/auth";
 import firebaseConfig from "../../firebase.config";
 import { UserContext } from '../../App';
 import { useHistory, useLocation } from 'react-router';
-
+import { Button } from 'react-bootstrap';
+import './LogIn.css'
 
 
 const LogIn = () => {
@@ -173,13 +174,13 @@ const LogIn = () => {
 
     return (
         <div>
-      
-        <h1>Auth</h1>
-        <input type="checkbox" onChange={()=>setNewUser(!newUser)} name="newUser" id=""/>
+
+       
+
+        <form onSubmit={handleSubmit} className='form-container'>
+          <input type="checkbox" onChange={()=>setNewUser(!newUser)} name="newUser" id=""/>
           <label htmlFor="newUser"> Already User?</label>
           <br/>
-
-        <form onSubmit={handleSubmit}>
           {newUser && <input type="text" name='name'  onBlur={handleBlur} placeholder='Name' required/>}
           <br/>
           <input type="text" name='email' onBlur={handleBlur} placeholder='Email' required/>
@@ -188,15 +189,18 @@ const LogIn = () => {
           <br/>
           {newUser && <input type="password" name="confirm-password" id="2" onBlur={handleBlur} placeholder='Confirm Password' required/>}
           <br/>
-          <input type="submit" value={newUser ? 'Sign Up' : 'Sign In'}/>
+          <input type="submit" value={newUser ? 'Sign Up' : 'Sign In'} className='submit-btn'/>
         </form>
+
         <p style={{color: 'red'}}>{user.error}</p>
         {
             user.success && <p style={{color: 'green'}}>User {newUser ? 'Created' : 'Logged In'} successfully</p>
         }
+
+        <h4 style={{textAlign:'center'}}>---------------- OR ----------------</h4>
                 
         <br/> <br/> 
-        <button onClick={handleGoogleSignIn}>SignIn with Google</button>
+        <Button variant="info" onClick={handleGoogleSignIn}>SignIn with Google</Button>
         </div>
     );
 };
