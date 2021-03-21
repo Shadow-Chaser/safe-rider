@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 import { useHistory } from 'react-router';
+import './OptionCard.css'
 
 const OptionCard = (props) => {
     const {name, image, id} = props.option;
@@ -12,7 +13,7 @@ const OptionCard = (props) => {
 
     return (
         <div className='m-3'>
-            <Card onClick={()=> handleOption(id)} style={{ width: '12rem' }} >
+            <Card onClick={()=> handleOption(id)}   className='option-card'>
                 <Card.Img variant="top" src={image} />
                 <Card.Body>
                     <Card.Title>{name}</Card.Title>

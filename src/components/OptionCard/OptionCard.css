@@ -1,0 +1,15 @@
+.option-card{
+    padding: 15px;
+    border-radius: 10px;
+    width:15rem;
+}
+.option-card:hover{
+    box-shadow: 10px 10px 15px gray;
+
+}
+
+.option-card img{
+    height: 95px;
+    width: 90px;
+    margin-left: 3.8em;
+}

@@ -1,6 +1,8 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
+import { Col, Row } from 'react-bootstrap';
 import OptionCard from '../OptionCard/OptionCard';
+import './Home.css'
 
 
 const Home = () => {
@@ -19,16 +21,14 @@ const Home = () => {
     },[])
 
     return (
-        <div style={{overflow:'hidden'}}>
+        <div style={{overflow:'hidden'}} className='home-container'>
            
-
-            <div className="d-flex  row ">   
-            <div className="col-md-8 col-sm-12 d-flex flex-wrap">
+           <Row className='d-flex justify-content-center option-container'>
                 {
-                options.map(option => <OptionCard option={option} key={option.id} ></OptionCard>)
+                    options.map(option => <OptionCard option={option} key={option.id} ></OptionCard>)
                 }
-            </div>
-            </div>
+            </Row>
+
         </div>
     );
 };

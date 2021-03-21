@@ -101,8 +101,6 @@ const LogIn = () => {
 
     }
 
-   
-
     const handleSubmit=(event)=>{
       if(newUser && user.email && user.password){
         firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
@@ -127,17 +125,18 @@ const LogIn = () => {
         firebase.auth().signInWithEmailAndPassword(user.email, user.password)
         .then(res =>{
 
-          var {displayName, email} = res.user;
-          console.log(res.user);
-          const signedInUser = {name: displayName, email} 
-          setLoggedInUser(signedInUser);
+          var {displayName} = res.user;
+          // const signedInUser = {name: displayName} 
+          // setLoggedInUser(signedInUser);
+          // console.log(loggedInUser);
 
           const newUserInfo = {...user};
           newUserInfo.isSignedIn = true; 
+          newUserInfo.name=displayName;
           setUser(newUserInfo);
           setLoggedInUser(newUserInfo);
           // updateUserInfo(user.name);
-          console.log(user.name);
+          // console.log(user.name);
           history.push(from);
         
         })

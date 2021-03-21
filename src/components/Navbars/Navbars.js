@@ -1,20 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Nav, Navbar} from 'react-bootstrap';
+import { UserContext } from '../../App';
 
 const Navbars = () => {
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     return (
         <div>
 
             <Navbar bg="light" expand="lg">
-                <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+                <Navbar.Brand href="#home">Safe Ride</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                         <Nav.Link href="/home">Home</Nav.Link>
                         <Nav.Link href="/option/:id">Destination</Nav.Link>
-                        <Nav.Link href="">BLog</Nav.Link>
+                        <Nav.Link href="">Blog</Nav.Link>
                         <Nav.Link href="">Contact</Nav.Link>
                         <Nav.Link href="/login">LogIn</Nav.Link>
+                        <h3>{loggedInUser.name}</h3>
 
                     </Nav>
                    

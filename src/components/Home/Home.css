@@ -1,3 +1,15 @@
-*{
-    background-image: url();
+.home-container{
+/* 
+    background-image: url('https://i.ibb.co/pKtNBX1/Bg.png');
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    height:550px; */
+
+}
+
+ .option-container{
+    margin-top: 5em;
+    margin-bottom: 5em;
 }
