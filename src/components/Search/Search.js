@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import SearchResult from '../SearchResult/SearchResult';
+import GoogleMap from '../GoogleMap/GoogleMap';
+import './Search.css'
 
 const Search = () => {
     const {id} = useParams()
@@ -30,21 +32,25 @@ const Search = () => {
         newRoute[e.target.name] = e.target.value;
         setRoute(newRoute);
     }
-    console.log(route);
+    // console.log(route);
     return (
-        <div>
+        <div className='search-container'>
                  <form >
                     <input type="text" name='from' onBlur={handleBlur} placeholder="Pick From"/>
                     <br/>
                     <input type="text" name='to' onBlur={handleBlur} placeholder="Pic To" />
                     <br/>
+                    <br/>
+                    <input type="date" name='journey-date' placeholder="Journey Date" />
                     
                 </form>
                 <button onClick={()=> setResult(true)}>Search</button>
 
                 {result && <SearchResult target = {target} route={route}></SearchResult>}
+
+                <br/> <br/> <br/> <br/>
         
-            
+                <GoogleMap></GoogleMap>
 
                
             

@@ -14,7 +14,9 @@ const LogIn = () => {
       isSignedIn : 'false',
       name:'',
       email:'',
-      password:''
+      password:'',
+      error:'',
+      success:false
     })
 
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
@@ -107,16 +109,19 @@ const LogIn = () => {
         .then(res =>{
 
           const newUserInfo = {...user};
-          // newUserInfo.isSignedIn = true; 
+          // newUserInfo.isSignedIn = true;
+          newUserInfo.error = '';
+          newUserInfo.success = true;
           setUser(newUserInfo);
           setLoggedInUser(newUserInfo);
           updateUserName(user.name)
           history.push(from);
         })
         .catch((error) => {
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          console.log(errorMessage);
+          const newUserInfo = {...user};
+          newUserInfo.error = error.message;
+          newUserInfo.success = false;
+          setUser(newUserInfo);
         });
       }
 
@@ -132,6 +137,8 @@ const LogIn = () => {
 
           const newUserInfo = {...user};
           newUserInfo.isSignedIn = true; 
+          newUserInfo.error = '';
+          newUserInfo.success = true;
           newUserInfo.name=displayName;
           setUser(newUserInfo);
           setLoggedInUser(newUserInfo);
@@ -141,9 +148,10 @@ const LogIn = () => {
         
         })
         .catch((error) => {
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          // console.log(errorMessage);
+          const newUserInfo = {...user};
+          newUserInfo.error = error.message;
+          newUserInfo.success = false;
+          setUser(newUserInfo);
         });
       }
       event.preventDefault()
@@ -172,7 +180,6 @@ const LogIn = () => {
           <br/>
 
         <form onSubmit={handleSubmit}>
-          
           {newUser && <input type="text" name='name'  onBlur={handleBlur} placeholder='Name' required/>}
           <br/>
           <input type="text" name='email' onBlur={handleBlur} placeholder='Email' required/>
@@ -181,8 +188,12 @@ const LogIn = () => {
           <br/>
           {newUser && <input type="password" name="confirm-password" id="2" onBlur={handleBlur} placeholder='Confirm Password' required/>}
           <br/>
-          <input type="submit" value="Submit"/>
+          <input type="submit" value={newUser ? 'Sign Up' : 'Sign In'}/>
         </form>
+        <p style={{color: 'red'}}>{user.error}</p>
+        {
+            user.success && <p style={{color: 'green'}}>User {newUser ? 'Created' : 'Logged In'} successfully</p>
+        }
                 
         <br/> <br/> 
         <button onClick={handleGoogleSignIn}>SignIn with Google</button>
