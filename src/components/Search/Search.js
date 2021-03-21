@@ -33,7 +33,6 @@ const Search = () => {
         newRoute[e.target.name] = e.target.value;
         setRoute(newRoute);
     }
-    // console.log(route);
     return (
         <div className='search-container'>
                  <form >

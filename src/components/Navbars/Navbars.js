@@ -8,14 +8,14 @@ const Navbars = () => {
         <div>
 
             <Navbar bg="light" expand="lg">
-                <Navbar.Brand href="#home">Safe Ride</Navbar.Brand>
+                <Navbar.Brand>Safe Ride</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                         <Nav.Link href="/home">Home</Nav.Link>
                         <Nav.Link href="/option/:id">Destination</Nav.Link>
-                        <Nav.Link href="">Blog</Nav.Link>
-                        <Nav.Link href="">Contact</Nav.Link>
+                        <Nav.Link >Blog</Nav.Link>
+                        <Nav.Link >Contact</Nav.Link>
                         <Nav.Link href="/login">LogIn</Nav.Link>
                         <h3>{loggedInUser.name}</h3>
 

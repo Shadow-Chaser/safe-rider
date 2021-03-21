@@ -26,10 +26,6 @@ const LogIn = () => {
     const location = useLocation();
     const { from } = location.state || { from: { pathname: "/" } };
 
-
-    // console.log(user);
-    // console.log(loggedInUser);
-
     if(!firebase.apps.length){
         firebase.initializeApp(firebaseConfig);
     }
@@ -48,13 +44,11 @@ const LogIn = () => {
             const signedInUser = {name: displayName, email} 
             setLoggedInUser(signedInUser);
             history.replace(from);
-            // console.log(displayName, email);
         }).catch((error) => {
             var errorCode = error.code;
             var errorMessage = error.message;
             var email = error.email;
             var credential = error.credential;
-            // console.log(errorCode, errorMessage, email);
         });
     }
 
@@ -94,7 +88,6 @@ const LogIn = () => {
       if(isFormValid){
         const newUser = {...user};
         newUser[event.target.name] = event.target.value;
-        // console.log(newUser);
 
         setUser(newUser);
 
@@ -110,7 +103,6 @@ const LogIn = () => {
         .then(res =>{
 
           const newUserInfo = {...user};
-          // newUserInfo.isSignedIn = true;
           newUserInfo.error = '';
           newUserInfo.success = true;
           setUser(newUserInfo);
@@ -132,9 +124,6 @@ const LogIn = () => {
         .then(res =>{
 
           var {displayName} = res.user;
-          // const signedInUser = {name: displayName} 
-          // setLoggedInUser(signedInUser);
-          // console.log(loggedInUser);
 
           const newUserInfo = {...user};
           newUserInfo.isSignedIn = true; 
@@ -143,8 +132,8 @@ const LogIn = () => {
           newUserInfo.name=displayName;
           setUser(newUserInfo);
           setLoggedInUser(newUserInfo);
-          // updateUserInfo(user.name);
-          // console.log(user.name);
+          
+    
           history.push(from);
         
         })
