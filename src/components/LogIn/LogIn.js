@@ -63,23 +63,30 @@ const LogIn = () => {
       if(event.target.name ==='email'){
           isFormValid = /(.+)@(.+){2,}\.(.+){2,}/.test(event.target.value)
       }
-      let password;
+      // let password;
       if(event.target.name ==='password'){
-        password = ""+event.target.value;
-        console.log("password :"+password);
+        // password = event.target.value;
+        // console.log("password :"+password);
+        
         const isPasswordValid = event.target.value.length > 6;
         const hasNumber = /\d{1}/.test(event.target.value);
         isFormValid = isPasswordValid && hasNumber; 
 
       }
 
-      if(event.target.name==='confirm-password'){
-        const confirmPassword = ""+event.target.value;
-        console.log("conf password :"+confirmPassword);
-        (password === confirmPassword)? isFormValid=true: isFormValid=false;
-      }
+      // if(event.target.name==='confirm-password'){
+      //   const confirmPassword = event.target.value;
+      //   console.log("conf password :"+confirmPassword);
+      //   if(password === confirmPassword){
+      //     isFormValid=true;
+      //   }
+      //   else{
+      //     isFormValid=false;
+      //   }
+      // }
 
-      console.log(isFormValid);
+
+      // console.log(isFormValid);
 
       if(isFormValid){
         const newUser = {...user};
