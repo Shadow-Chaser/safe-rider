@@ -19,7 +19,7 @@ const Home = () => {
     },[])
 
     return (
-        <div>
+        <div style={{overflow:'hidden'}}>
            
 
             <div className="d-flex  row ">   

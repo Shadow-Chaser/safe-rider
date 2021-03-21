@@ -25,7 +25,7 @@ const LogIn = () => {
 
 
     // console.log(user);
-    console.log(loggedInUser);
+    // console.log(loggedInUser);
 
     if(!firebase.apps.length){
         firebase.initializeApp(firebaseConfig);
@@ -45,13 +45,13 @@ const LogIn = () => {
             const signedInUser = {name: displayName, email} 
             setLoggedInUser(signedInUser);
             history.replace(from);
-            console.log(displayName, email);
+            // console.log(displayName, email);
         }).catch((error) => {
             var errorCode = error.code;
             var errorMessage = error.message;
             var email = error.email;
             var credential = error.credential;
-            console.log(errorCode, errorMessage, email);
+            // console.log(errorCode, errorMessage, email);
         });
     }
 
@@ -63,18 +63,31 @@ const LogIn = () => {
       if(event.target.name ==='email'){
           isFormValid = /(.+)@(.+){2,}\.(.+){2,}/.test(event.target.value)
       }
-
+      let password;
       if(event.target.name ==='password'){
+        password = ""+event.target.value;
+        console.log("password :"+password);
         const isPasswordValid = event.target.value.length > 6;
         const hasNumber = /\d{1}/.test(event.target.value);
         isFormValid = isPasswordValid && hasNumber; 
 
       }
 
+      if(event.target.name==='confirm-password'){
+        const confirmPassword = ""+event.target.value;
+        console.log("conf password :"+confirmPassword);
+        (password === confirmPassword)? isFormValid=true: isFormValid=false;
+      }
+
+      console.log(isFormValid);
+
       if(isFormValid){
         const newUser = {...user};
         newUser[event.target.name] = event.target.value;
+        // console.log(newUser);
+
         setUser(newUser);
+
 
       }
 
@@ -89,16 +102,16 @@ const LogIn = () => {
         .then(res =>{
 
           const newUserInfo = {...user};
-          newUserInfo.isSignedIn = true; 
+          // newUserInfo.isSignedIn = true; 
           setUser(newUserInfo);
-          updateUserInfo(user.name);
           setLoggedInUser(newUserInfo);
+          updateUserName(user.name)
           history.push(from);
         })
         .catch((error) => {
           var errorCode = error.code;
           var errorMessage = error.message;
-          // ..
+          console.log(errorMessage);
         });
       }
 
@@ -107,40 +120,46 @@ const LogIn = () => {
         firebase.auth().signInWithEmailAndPassword(user.email, user.password)
         .then(res =>{
 
+          var {displayName, email} = res.user;
+          console.log(res.user);
+          const signedInUser = {name: displayName, email} 
+          setLoggedInUser(signedInUser);
+
           const newUserInfo = {...user};
           newUserInfo.isSignedIn = true; 
           setUser(newUserInfo);
-          updateUserInfo(user.name);
           setLoggedInUser(newUserInfo);
+          // updateUserInfo(user.name);
+          console.log(user.name);
           history.push(from);
         
         })
         .catch((error) => {
           var errorCode = error.code;
           var errorMessage = error.message;
+          // console.log(errorMessage);
         });
       }
       event.preventDefault()
     }
 
 
-    const updateUserInfo = (name) =>{
-      var user = firebase.auth().currentUser;
-
-user.updateProfile({
-      displayName: name,
-    }).then(function() {
-      // Update successful.
-    }).catch(function(error) {
-      // An error happened.
-    });
-
+    const updateUserName = name =>{
+      const user = firebase.auth().currentUser;
+  
+      user.updateProfile({
+        displayName: name
+      }).then(function() {
+        console.log('user name updated successfully')
+      }).catch(function(error) {
+        console.log(error)
+      })
     }
 
 
     return (
         <div>
-        
+      
         <h1>Auth</h1>
         <input type="checkbox" onChange={()=>setNewUser(!newUser)} name="newUser" id=""/>
           <label htmlFor="newUser"> Already User?</label>
@@ -148,11 +167,13 @@ user.updateProfile({
 
         <form onSubmit={handleSubmit}>
           
-          {newUser && <input type="text" name='name' placeholder='Name' required/>}
+          {newUser && <input type="text" name='name'  onBlur={handleBlur} placeholder='Name' required/>}
           <br/>
           <input type="text" name='email' onBlur={handleBlur} placeholder='Email' required/>
           <br/>
-          <input type="password" name="password" id="" onBlur={handleBlur} placeholder='Password' required/>
+          <input type="password" name="password" id="1" onBlur={handleBlur} placeholder='Password' required/>
+          <br/>
+          {newUser && <input type="password" name="confirm-password" id="2" onBlur={handleBlur} placeholder='Confirm Password' required/>}
           <br/>
           <input type="submit" value="Submit"/>
         </form>
