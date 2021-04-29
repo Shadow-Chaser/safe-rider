@@ -4,23 +4,27 @@ import SearchResult from '../SearchResult/SearchResult';
 import GoogleMap from '../GoogleMap/GoogleMap';
 import './Search.css'
 import { Button } from 'react-bootstrap';
+import data from '../../fakeData/data.json'
 
 const Search = () => {
     const {id} = useParams()
     const transportId = parseInt(id);
 
-    const [transports, setTransports] = useState([]);
+    // const [transports, setTransports] = useState([]);
 
 
-    useEffect(()=>{
-        fetch(`https://api.mocki.io/v1/f55e8be6`)
-        .then(res=>res.json())
-        .then(data=>setTransports(data))
-    }, [])
+    // useEffect(()=>{
+    //     fetch(`https://api.mocki.io/v1/f55e8be6`)
+    //     .then(res=>res.json())
+    //     .then(data=>setTransports(data))
+    // }, [])
 
+    // console.log(data);
+    // console.log(id);
     
 
-    const target = transports.find(transport => transportId === transport.id) || {};
+    const target = data.find(transport => transportId === transport.id) || {};
+    // console.log(target);
     const [result, setResult] = useState(false);
 
     const [route, setRoute] = useState({
